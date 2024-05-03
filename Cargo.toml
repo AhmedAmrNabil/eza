@@ -91,6 +91,7 @@ timeago = { version = "0.4.2", default-features = false }
 unicode-width = "0.1"
 zoneinfo_compiled = "0.5.1"
 rayon = "1.10.0"
+gethostname = "0.4.3"
 ansi-width = "0.1.0"
 
 [dependencies.git2]

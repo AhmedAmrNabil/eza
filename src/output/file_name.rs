@@ -1,5 +1,6 @@
 use std::fmt::Debug;
 use std::path::Path;
+use gethostname::gethostname;
 
 use nu_ansi_term::{AnsiString as ANSIString, Style};
 use path_clean;
@@ -397,9 +398,9 @@ impl<'a, 'dir, C: Colours> FileName<'a, 'dir, C> {
                 // On Windows, `std::fs::canonicalize` adds the Win32 File prefix, which we need to remove
                 #[cfg(target_os = "windows")]
                 let abs_path = abs_path.strip_prefix("\\\\?\\").unwrap_or(&abs_path);
-
+                let hostname = gethostname();
                 bits.push(ANSIString::from(format!(
-                    "{HYPERLINK_START}file://{abs_path}{HYPERLINK_END}"
+                    "{HYPERLINK_START}file://wsl.localhost/{}{abs_path}{HYPERLINK_END}",hostname.to_str().unwrap()
                 )));
 
                 display_hyperlink = true;
